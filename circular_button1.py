@@ -8,32 +8,43 @@ class Window(QMainWindow):
         super().__init__() 
         self.setWindowTitle("Python ") 
         self.setGeometry(100, 100, 600, 400)
+        self.update
         self.UiComponents() 
         self.show() 
         
     # method for widgets 
     def UiComponents(self): 
         # creating a push button 
-        button = QPushButton("Start", self) 
+        self.button = QPushButton("Start", self) 
   
-        button.setGeometry(200, 150, 100, 100) 
+        self.button.setGeometry(200, 150, 100, 100) 
+        self.button.setCheckable(True)
 
-        button.clicked.connect(self.clickme)
-        button.setStyleSheet("QPushButton"
+        self.button.clicked.connect(self.clickme)
+        self.button.setStyleSheet("QPushButton"
                              "{"
                              "border-radius : 50;  border : 2px solid black;"
                              "background-color : red;"
-                             ""
-                             "}"
-                             "QPushButton::pressed"
-                             "{"
-                             "background-color : green;"
                              "}"
                              )    
   
-    def clickme(self): 
-        import send
-        print('pressed')
+    def clickme(self):
+        if self.button.isChecked():
+            self.button.setStyleSheet("QPushButton"
+                             "{"
+                             "border-radius : 50;  border : 2px solid black;"
+                             "background-color : green;"
+                             "}"
+                             ) 
+        else:
+            self.button.setStyleSheet("QPushButton"
+                             "{"
+                             "border-radius : 50;  border : 2px solid black;"
+                             "background-color : red;"
+                             "}"
+                             ) 
+        
+
 
 App = QApplication(sys.argv) 
 window = Window() 
